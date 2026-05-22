@@ -9,107 +9,59 @@
 
 body{
     margin:0;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
     background:
     radial-gradient(circle at top,#35114d,#12051d 60%);
     overflow-y:auto;
     overflow-x:hidden;
-    overflow-x:hidden;
     font-family:sans-serif;
-    color:whiwidth:90%;
-    max-width:900px;ainer{
+    color:white;
+    padding:20px 0;
+}
+
+.container{
     width:90%;
     max-width:900px;
-    background:rgba(0,0,0,0.4);
-    border:3px spadding:30px;
-    margin:40px 0;
+    background:rgba(0,0,0,0.35);
+    border:3px solid #ff00cc;
     border-radius:30px;
-    padding:30px;
-    margin:40px 0;
+    padding:25px;
     text-align:center;
-    box-shfont-size:55px;0px #ff00cc,
+    box-shadow:
+    0 0 20px #ff00cc,
     0 0 50px #6a00ff;
-}
-
-h1{
-    font-size:55px;
-    margin:0 0 20px;
-    color:#ffe600;
-    text-shadow:
-    0 0 10px #ffe600,
-    0 0 30px #ff9900,
-    0 0 50px #ff5500;
-}
-
-.money{
-    font-size:35px;
-    margin-bottom:30px;
-    color:#00ffea;
-    text-shadow:0 0 15px #00ffea;
 }
 
 .slot-area{
     display:flex;
-    justify-contentwidth:140px; gap:height:140px;gin-bottom:30px;
-}
-
-.slot{
-    width:140px;
-    height:140px;
-    border-radius:25px;
-    display:ffont-size:70px;y-content:center;
-    align-items:center;
-    font-size:
-    background:#111;
-    border:5px solid #ffe600;
-    box-shadow:
-    0 0 20px #ffe600,
-    inset 0 0 20px #ff9900;
-}
-
-.bet-text{
-    font-size:25px;
-    margin-bottom:15px;
-}
-
-.controls{
-    display:flex;
     justify-content:center;
-    gap:20px;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
     flex-wrap:wrap;
 }
 
-button{
-    padding:15px 35px;
-    border:none;
-    border-radius:15px;
-    font-size:25px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.2s;
-}
+.slot{
+    width:120px;
+    height:120px;
 
-button:hover{
-    transform:scale(1.08);
-}
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-.start{
-    background:#00ff88;
-    box-shadow:0 0 20px #00ff88;
-}
+    font-size:60px;
+    line-height:1;
 
-.bet{
-    background:#00c3ff;
-    box-shadowfont-size:32px;ff;
-}
+    background:#111;
+    border:5px solid #ffe600;
+    border-radius:25px;
 
-#result{
-    margin-top:30px;
-    font-font-weight:bold;
-    min-height:60px;
+    box-shadow:
+    0 0 20px #ffe600,
+    inset 0 0 20px #ff9900;
 }
 
 .shop{
@@ -122,61 +74,47 @@ button:hover{
 }
 
 .shop h2{
-    margin-top:0;
-    color:#00ffea;
-    text-shadow:0 0 15px #00ffea;
+    font-size:35px;
+    margin-bottom:20px;
+    text-align:center;
 }
 
 .shop-buttons{
     display:flex;
     justify-content:center;
-    gap:20px;
+    gap:15px;
     flex-wrap:wrap;
 }
 
 .shop-btn{
-    width:200px;
-    padding:20px;
-    background:#8a2eff;
-    color:white;
-    box-shadow:0 0 20px #8a2eff;
-    line-height:1.6;
+    width:220px;
+    min-height:120px;
+    padding:15px;
+    font-size:20px;
+    line-height:1.5;
 }
 
-.win{
-    color:#ffe600;
-    text-shadow:
-    0 0 10px #ffe600,
-    0 0 30px #ff8800,
-    0 0 50px #ff0000;
-    animation:flash 0.5s infinite;
-}
+@media(max-width:700px){
 
-.lose{
-    color:#ff5555;
-}
-
-@keyframes flash{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
-}
-
-@keyframes rainbow{
-    0%{filter:hue-rotate(0deg);}
-    100%{filter:hue-rotate(360deg);}
-}
-
-@keyframes explode{
-    0%{
-        transform:scale(0) rotate(0deg);
-        opacity:1;
+    h1{
+        font-size:40px;
     }
 
-    100%{
-        transform:scale(2) rotate(720deg);
-        opacity:0;
+    .slot{
+        width:90px;
+        height:90px;
+        font-size:45px;
     }
+
+    button{
+        font-size:20px;
+        padding:12px 20px;
+    }
+
+    .shop-btn{
+        width:100%;
+    }
+
 }
 
 </style>
