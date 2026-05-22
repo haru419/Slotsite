@@ -12,169 +12,280 @@ body{
     min-height:100vh;
     display:flex;
     justify-content:center;
-    align-items:flex-start;
+    align-items:center;
     background:
-    radial-gradient(circle at top,#35114d,#12051d 60%);
+    radial-gradient(circle at top,#2b0040,#090010 70%);
     overflow-y:auto;
-    overflow-x:hidden;
     font-family:sans-serif;
     color:white;
-    padding:20px 0;
 }
 
 .container{
-    width:90%;
-    max-width:900px;
-    background:rgba(0,0,0,0.35);
-    border:3px solid #ff00cc;
-    border-radius:30px;
-    padding:25px;
+    width:95%;
+    max-width:1000px;
+    background:linear-gradient(
+        180deg,
+        #3d003d,
+        #17001f
+    );
+
+    border:6px solid gold;
+    border-radius:35px;
+
+    padding:30px;
+
     text-align:center;
+
     box-shadow:
-    0 0 20px #ff00cc,
-    0 0 50px #6a00ff;
+    0 0 30px gold,
+    inset 0 0 20px rgba(255,255,255,0.2);
+
+    position:relative;
 }
 
 h1{
-    font-size:55px;
+    font-size:60px;
     margin-bottom:20px;
     color:#ffe600;
+
     text-shadow:
     0 0 10px #ffe600,
-    0 0 30px #ff9900,
-    0 0 50px #ff5500;
+    0 0 40px orange,
+    0 0 70px red;
 }
 
-.money{
-    font-size:28px;
-    margin-bottom:10px;
-    color:#00ffee;
-    text-shadow:0 0 15px #00ffee;
+.info{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
+
 }
 
-.bet-text{
-    font-size:28px;
-    margin-bottom:20px;
+.panel{
+
+    background:#111;
+
+    border:3px solid #00ffee;
+
+    border-radius:20px;
+
+    padding:15px 25px;
+
+    min-width:180px;
+
+    box-shadow:
+    0 0 15px #00ffee;
+
+    font-size:24px;
+
+}
+
+.slot-machine{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:25px;
+
+    margin-top:30px;
+
 }
 
 .slot-area{
+
     display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:15px;
-    margin-bottom:25px;
-    flex-wrap:wrap;
+    gap:20px;
+
 }
 
 .slot{
-    width:120px;
-    height:120px;
+
+    width:150px;
+    height:150px;
+
+    background:black;
+
+    border:5px solid gold;
+
+    border-radius:20px;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-size:60px;
-    line-height:1;
-
-    background:#111;
-    border:5px solid #ffe600;
-    border-radius:25px;
+    font-size:80px;
 
     box-shadow:
-    0 0 20px #ffe600,
-    inset 0 0 20px #ff9900;
+    0 0 20px gold,
+    inset 0 0 20px orange;
+
 }
 
-.controls{
+.lever-box{
+
     display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
+    flex-direction:column;
+    align-items:center;
+
 }
 
-button{
-    padding:15px 30px;
-    border:none;
-    border-radius:15px;
-    font-size:22px;
-    font-weight:bold;
+.lever{
+
+    width:25px;
+    height:180px;
+
+    background:silver;
+
+    border-radius:20px;
+
+    position:relative;
+
     cursor:pointer;
-    transition:0.2s;
+
+    transition:0.15s;
+
+    box-shadow:
+    0 0 10px white;
+
 }
 
-button:hover{
-    transform:scale(1.05);
+.lever:active{
+
+    transform:
+    translateY(25px);
+
 }
 
-.bet{
-    background:#00bfff;
-    box-shadow:0 0 20px #00bfff;
-}
+.ball{
 
-.start{
-    background:#00ff88;
-    box-shadow:0 0 20px #00ff88;
+    width:60px;
+    height:60px;
+
+    background:red;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    top:-10px;
+    left:-18px;
+
+    box-shadow:
+    0 0 20px red,
+    0 0 40px orange;
+
 }
 
 #result{
-    margin-top:30px;
-    font-size:35px;
+
+    margin-top:35px;
+
+    font-size:40px;
+
     font-weight:bold;
-    min-height:50px;
+
+    min-height:60px;
+
 }
 
 .win{
+
     color:#ffe600;
+
     text-shadow:
-    0 0 10px #ffe600,
-    0 0 30px #ff8800;
+    0 0 10px yellow,
+    0 0 30px orange;
+
 }
 
 .lose{
+
     color:#ff6666;
+
 }
 
 .shop{
+
     margin-top:40px;
+
     padding:25px;
+
     border-radius:25px;
-    background:rgba(255,255,255,0.08);
-    border:2px solid #00c3ff;
-    box-shadow:0 0 20px #00c3ff;
+
+    background:rgba(255,255,255,0.06);
+
+    border:3px solid #00c3ff;
+
+    box-shadow:
+    0 0 20px #00c3ff;
+
 }
 
 .shop h2{
+
     font-size:35px;
-    margin-bottom:20px;
-    text-align:center;
+
     color:#00ffee;
+
 }
 
 .shop-buttons{
+
     display:flex;
+
     justify-content:center;
-    gap:15px;
+
     flex-wrap:wrap;
+
+    gap:15px;
+
 }
 
 .shop-btn{
+
     width:220px;
-    min-height:120px;
-    padding:15px;
-    font-size:20px;
-    line-height:1.5;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:20px;
+
     background:#8a2eff;
+
     color:white;
-    box-shadow:0 0 20px #8a2eff;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 20px #8a2eff;
+
+}
+
+.shop-btn:hover{
+
+    transform:scale(1.05);
+
 }
 
 @keyframes rainbow{
+
     0%{filter:hue-rotate(0deg);}
     100%{filter:hue-rotate(360deg);}
+
 }
 
 @keyframes explode{
+
     0%{
         transform:scale(0);
         opacity:1;
@@ -184,27 +295,29 @@ button:hover{
         transform:scale(2);
         opacity:0;
     }
+
 }
 
-@media(max-width:700px){
+@media(max-width:850px){
 
-    h1{
-        font-size:40px;
+    .slot-machine{
+
+        flex-direction:column;
+
     }
 
     .slot{
-        width:90px;
-        height:90px;
-        font-size:45px;
+
+        width:100px;
+        height:100px;
+        font-size:55px;
+
     }
 
-    button{
-        font-size:18px;
-        padding:12px 20px;
-    }
+    h1{
 
-    .shop-btn{
-        width:100%;
+        font-size:42px;
+
     }
 
 }
@@ -218,64 +331,57 @@ button:hover{
 
     <h1>🎰 NEON SLOT 🎰</h1>
 
-    <div class="money">
-        💴 所持金 :
-        <span id="yen">10000</span> 円
+    <div class="info">
+
+        <div class="panel">
+            💴 所持金<br>
+            <span id="yen">10000</span> 円
+        </div>
+
+        <div class="panel">
+            🪙 コイン<br>
+            <span id="coin">1000</span>
+        </div>
+
+        <div class="panel">
+            ⭐ Lv<br>
+            <span id="level">1</span>
+        </div>
+
+        <div class="panel">
+            🍀 Luck<br>
+            <span id="luckLevel">0</span>
+        </div>
+
     </div>
 
-    <div class="money">
-        🪙 コイン :
-        <span id="coin">1000</span>
-    </div>
-
-    <div class="money">
-        ⭐ レベル :
-        <span id="level">1</span>
-    </div>
-
-    <div class="money">
-        EXP :
-        <span id="exp">0</span>
-        /
-        <span id="nextExp">1000</span>
-    </div>
-
-    <div class="money">
-        🍀 確率レベル :
-        <span id="luckLevel">0</span>
-    </div>
-
-    <div class="bet-text">
+    <div class="panel">
         BET :
         <span id="bet">100</span>
     </div>
 
-    <div class="slot-area">
+    <div class="slot-machine">
 
-        <div class="slot" id="slot1">🍒</div>
+        <div class="slot-area">
 
-        <div class="slot" id="slot2">7</div>
+            <div class="slot" id="slot1">🍒</div>
 
-        <div class="slot" id="slot3">⭐</div>
+            <div class="slot" id="slot2">🍋</div>
 
-    </div>
+            <div class="slot" id="slot3">7</div>
 
-    <div class="controls">
+        </div>
 
-        <button class="bet"
-        onclick="changeBet(-100)">
-            BET -
-        </button>
+        <div class="lever-box">
 
-        <button class="start"
-        onclick="startSlot()">
-            START
-        </button>
+            <div class="lever"
+            onclick="startSlot()">
 
-        <button class="bet"
-        onclick="changeBet(100)">
-            BET +
-        </button>
+                <div class="ball"></div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -290,7 +396,7 @@ button:hover{
             <button class="shop-btn"
             onclick="buyCoins(1000,500)">
 
-                1000コイン購入<br>
+                1000コイン<br>
                 500円
 
             </button>
@@ -298,16 +404,8 @@ button:hover{
             <button class="shop-btn"
             onclick="buyCoins(5000,2000)">
 
-                5000コイン購入<br>
+                5000コイン<br>
                 2000円
-
-            </button>
-
-            <button class="shop-btn"
-            onclick="buyCoins(10000,3500)">
-
-                10000コイン購入<br>
-                3500円
 
             </button>
 
@@ -336,11 +434,6 @@ let exp = 0;
 let nextExp = 1000;
 
 let luckLevel = 0;
-
-
-// ==========================
-// レア確率システム
-// ==========================
 
 function getRandomSymbol(){
 
@@ -376,11 +469,6 @@ function getRandomSymbol(){
 
 }
 
-
-// ==========================
-// UI更新
-// ==========================
-
 function updateUI(){
 
     document.getElementById("yen").innerHTML = yen;
@@ -391,115 +479,10 @@ function updateUI(){
 
     document.getElementById("level").innerHTML = level;
 
-    document.getElementById("exp").innerHTML = exp;
-
-    document.getElementById("nextExp").innerHTML =
-    nextExp;
-
     document.getElementById("luckLevel").innerHTML =
     luckLevel;
 
 }
-
-
-// ==========================
-// BET変更
-// ==========================
-
-function changeBet(amount){
-
-    bet += amount;
-
-    if(bet < 100){
-
-        bet = 100;
-
-    }
-
-    if(bet > 500){
-
-        bet = 500;
-
-    }
-
-    updateUI();
-
-}
-
-
-// ==========================
-// EXP追加
-// ==========================
-
-function addExp(amount){
-
-    exp += amount;
-
-    while(exp >= nextExp){
-
-        exp -= nextExp;
-
-        level++;
-
-        nextExp = Math.floor(nextExp * 1.5);
-
-        document.getElementById("result").innerHTML =
-        "⭐ LEVEL UP !! Lv." + level;
-
-        document.getElementById("result").className =
-        "win";
-
-    }
-
-}
-
-
-// ==========================
-// 確率UP
-// ==========================
-
-function upgradeLuck(){
-
-    const cost = 5000;
-
-    if(level < 5){
-
-        document.getElementById("result").innerHTML =
-        "⭐ Lv5で解放";
-
-        return;
-
-    }
-
-    if(coin < cost){
-
-        document.getElementById("result").innerHTML =
-        "🪙 コイン不足";
-
-        return;
-
-    }
-
-    coin -= cost;
-
-    luckLevel++;
-
-    document.getElementById("result").innerHTML =
-    "🍀 確率アップ！ Lv." + luckLevel;
-
-    document.getElementById("result").className =
-    "win";
-
-    saveGame();
-
-    updateUI();
-
-}
-
-
-// ==========================
-// スロット開始
-// ==========================
 
 function startSlot(){
 
@@ -515,8 +498,6 @@ function startSlot(){
     coin -= bet;
 
     updateUI();
-
-    document.getElementById("result").innerHTML = "";
 
     let count = 0;
 
@@ -544,11 +525,6 @@ function startSlot(){
     },100);
 
 }
-
-
-// ==========================
-// 当たり判定
-// ==========================
 
 function checkResult(){
 
@@ -578,7 +554,7 @@ function checkResult(){
             result.innerHTML =
             "🌈🔥 SUPER JACKPOT +" +
             reward +
-            "コイン 🔥🌈";
+            " 🔥🌈";
 
             createExplosion();
 
@@ -592,8 +568,7 @@ function checkResult(){
 
             result.innerHTML =
             "🎉 JACKPOT +" +
-            reward +
-            "コイン 🎉";
+            reward;
 
         }
 
@@ -601,13 +576,25 @@ function checkResult(){
 
         coin += reward;
 
-        addExp(reward);
+        exp += reward;
+
+        if(exp >= nextExp){
+
+            exp -= nextExp;
+
+            level++;
+
+            nextExp *= 1.5;
+
+        }
 
     }else{
 
-        result.innerHTML = "😢 ハズレ";
+        result.innerHTML =
+        "😢 ハズレ";
 
-        result.className = "lose";
+        result.className =
+        "lose";
 
     }
 
@@ -616,11 +603,6 @@ function checkResult(){
     updateUI();
 
 }
-
-
-// ==========================
-// 爆発演出
-// ==========================
 
 function createExplosion(){
 
@@ -661,11 +643,6 @@ function createExplosion(){
 
 }
 
-
-// ==========================
-// コイン購入
-// ==========================
-
 function buyCoins(amount,price){
 
     if(yen < price){
@@ -681,8 +658,31 @@ function buyCoins(amount,price){
 
     coin += amount;
 
+    saveGame();
+
+    updateUI();
+
+}
+
+function upgradeLuck(){
+
+    const cost = 5000;
+
+    if(coin < cost){
+
+        document.getElementById("result").innerHTML =
+        "🪙 コイン不足";
+
+        return;
+
+    }
+
+    coin -= cost;
+
+    luckLevel++;
+
     document.getElementById("result").innerHTML =
-    "🪙 " + amount + "コイン購入！";
+    "🍀 確率UP !!";
 
     document.getElementById("result").className =
     "win";
@@ -693,11 +693,6 @@ function buyCoins(amount,price){
 
 }
 
-
-// ==========================
-// 保存
-// ==========================
-
 function saveGame(){
 
     localStorage.setItem("slotYen",yen);
@@ -706,18 +701,9 @@ function saveGame(){
 
     localStorage.setItem("slotLevel",level);
 
-    localStorage.setItem("slotExp",exp);
-
-    localStorage.setItem("slotNextExp",nextExp);
-
     localStorage.setItem("slotLuck",luckLevel);
 
 }
-
-
-// ==========================
-// 読み込み
-// ==========================
 
 function loadGame(){
 
@@ -730,46 +716,28 @@ function loadGame(){
     const savedLevel =
     localStorage.getItem("slotLevel");
 
-    const savedExp =
-    localStorage.getItem("slotExp");
-
-    const savedNextExp =
-    localStorage.getItem("slotNextExp");
-
     const savedLuck =
     localStorage.getItem("slotLuck");
 
-    if(savedYen !== null){
+    if(savedYen){
 
         yen = Number(savedYen);
 
     }
 
-    if(savedCoin !== null){
+    if(savedCoin){
 
         coin = Number(savedCoin);
 
     }
 
-    if(savedLevel !== null){
+    if(savedLevel){
 
         level = Number(savedLevel);
 
     }
 
-    if(savedExp !== null){
-
-        exp = Number(savedExp);
-
-    }
-
-    if(savedNextExp !== null){
-
-        nextExp = Number(savedNextExp);
-
-    }
-
-    if(savedLuck !== null){
+    if(savedLuck){
 
         luckLevel = Number(savedLuck);
 
