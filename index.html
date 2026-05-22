@@ -46,8 +46,8 @@ h1{
 }
 
 .money{
-    font-size:30px;
-    margin-bottom:15px;
+    font-size:28px;
+    margin-bottom:10px;
     color:#00ffee;
     text-shadow:0 0 15px #00ffee;
 }
@@ -97,7 +97,7 @@ button{
     padding:15px 30px;
     border:none;
     border-radius:15px;
-    font-size:25px;
+    font-size:22px;
     font-weight:bold;
     cursor:pointer;
     transition:0.2s;
@@ -199,7 +199,7 @@ button:hover{
     }
 
     button{
-        font-size:20px;
+        font-size:18px;
         padding:12px 20px;
     }
 
@@ -228,28 +228,52 @@ button:hover{
         <span id="coin">1000</span>
     </div>
 
+    <div class="money">
+        ⭐ レベル :
+        <span id="level">1</span>
+    </div>
+
+    <div class="money">
+        EXP :
+        <span id="exp">0</span>
+        /
+        <span id="nextExp">1000</span>
+    </div>
+
+    <div class="money">
+        🍀 確率レベル :
+        <span id="luckLevel">0</span>
+    </div>
+
     <div class="bet-text">
         BET :
         <span id="bet">100</span>
     </div>
 
     <div class="slot-area">
+
         <div class="slot" id="slot1">🍒</div>
+
         <div class="slot" id="slot2">7</div>
+
         <div class="slot" id="slot3">⭐</div>
+
     </div>
 
     <div class="controls">
 
-        <button class="bet" onclick="changeBet(-100)">
+        <button class="bet"
+        onclick="changeBet(-100)">
             BET -
         </button>
 
-        <button class="start" onclick="startSlot()">
+        <button class="start"
+        onclick="startSlot()">
             START
         </button>
 
-        <button class="bet" onclick="changeBet(100)">
+        <button class="bet"
+        onclick="changeBet(100)">
             BET +
         </button>
 
@@ -287,6 +311,14 @@ button:hover{
 
             </button>
 
+            <button class="shop-btn"
+            onclick="upgradeLuck()">
+
+                🍀 確率UP<br>
+                5000コイン
+
+            </button>
+
         </div>
 
     </div>
@@ -295,31 +327,84 @@ button:hover{
 
 <script>
 
-const symbols = [
-
-    "🍒","🍒","🍒","🍒","🍒",
-
-    "🍋","🍋","🍋","🍋",
-
-    "🍉","🍉","🍉",
-
-    "⭐","⭐",
-
-    "7"
-
-];
-
 let yen = 10000;
 let coin = 1000;
 let bet = 100;
 
+let level = 1;
+let exp = 0;
+let nextExp = 1000;
+
+let luckLevel = 0;
+
+
+// ==========================
+// レア確率システム
+// ==========================
+
+function getRandomSymbol(){
+
+    let pool = [
+
+        "🍒","🍒","🍒","🍒","🍒",
+
+        "🍋","🍋","🍋","🍋",
+
+        "🍉","🍉","🍉",
+
+        "⭐","⭐",
+
+        "7"
+
+    ];
+
+    for(let i=0;i<luckLevel;i++){
+
+        pool.push("⭐");
+
+        if(i >= 3){
+
+            pool.push("7");
+
+        }
+
+    }
+
+    return pool[
+        Math.floor(Math.random()*pool.length)
+    ];
+
+}
+
+
+// ==========================
+// UI更新
+// ==========================
+
 function updateUI(){
 
     document.getElementById("yen").innerHTML = yen;
+
     document.getElementById("coin").innerHTML = coin;
+
     document.getElementById("bet").innerHTML = bet;
 
+    document.getElementById("level").innerHTML = level;
+
+    document.getElementById("exp").innerHTML = exp;
+
+    document.getElementById("nextExp").innerHTML =
+    nextExp;
+
+    document.getElementById("luckLevel").innerHTML =
+    luckLevel;
+
 }
+
+
+// ==========================
+// BET変更
+// ==========================
 
 function changeBet(amount){
 
@@ -340,6 +425,81 @@ function changeBet(amount){
     updateUI();
 
 }
+
+
+// ==========================
+// EXP追加
+// ==========================
+
+function addExp(amount){
+
+    exp += amount;
+
+    while(exp >= nextExp){
+
+        exp -= nextExp;
+
+        level++;
+
+        nextExp = Math.floor(nextExp * 1.5);
+
+        document.getElementById("result").innerHTML =
+        "⭐ LEVEL UP !! Lv." + level;
+
+        document.getElementById("result").className =
+        "win";
+
+    }
+
+}
+
+
+// ==========================
+// 確率UP
+// ==========================
+
+function upgradeLuck(){
+
+    const cost = 5000;
+
+    if(level < 5){
+
+        document.getElementById("result").innerHTML =
+        "⭐ Lv5で解放";
+
+        return;
+
+    }
+
+    if(coin < cost){
+
+        document.getElementById("result").innerHTML =
+        "🪙 コイン不足";
+
+        return;
+
+    }
+
+    coin -= cost;
+
+    luckLevel++;
+
+    document.getElementById("result").innerHTML =
+    "🍀 確率アップ！ Lv." + luckLevel;
+
+    document.getElementById("result").className =
+    "win";
+
+    saveGame();
+
+    updateUI();
+
+}
+
+
+// ==========================
+// スロット開始
+// ==========================
 
 function startSlot(){
 
@@ -363,13 +523,13 @@ function startSlot(){
     const interval = setInterval(() => {
 
         document.getElementById("slot1").innerHTML =
-        symbols[Math.floor(Math.random()*symbols.length)];
+        getRandomSymbol();
 
         document.getElementById("slot2").innerHTML =
-        symbols[Math.floor(Math.random()*symbols.length)];
+        getRandomSymbol();
 
         document.getElementById("slot3").innerHTML =
-        symbols[Math.floor(Math.random()*symbols.length)];
+        getRandomSymbol();
 
         count++;
 
@@ -384,6 +544,11 @@ function startSlot(){
     },100);
 
 }
+
+
+// ==========================
+// 当たり判定
+// ==========================
 
 function checkResult(){
 
@@ -403,7 +568,6 @@ function checkResult(){
 
         let reward = bet * 5;
 
-        // 超激レア777
         if(s1 == "7"){
 
             reward = bet * 30;
@@ -437,6 +601,8 @@ function checkResult(){
 
         coin += reward;
 
+        addExp(reward);
+
     }else{
 
         result.innerHTML = "😢 ハズレ";
@@ -450,6 +616,11 @@ function checkResult(){
     updateUI();
 
 }
+
+
+// ==========================
+// 爆発演出
+// ==========================
 
 function createExplosion(){
 
@@ -490,6 +661,11 @@ function createExplosion(){
 
 }
 
+
+// ==========================
+// コイン購入
+// ==========================
+
 function buyCoins(amount,price){
 
     if(yen < price){
@@ -517,13 +693,31 @@ function buyCoins(amount,price){
 
 }
 
+
+// ==========================
+// 保存
+// ==========================
+
 function saveGame(){
 
     localStorage.setItem("slotYen",yen);
 
     localStorage.setItem("slotCoin",coin);
 
+    localStorage.setItem("slotLevel",level);
+
+    localStorage.setItem("slotExp",exp);
+
+    localStorage.setItem("slotNextExp",nextExp);
+
+    localStorage.setItem("slotLuck",luckLevel);
+
 }
+
+
+// ==========================
+// 読み込み
+// ==========================
 
 function loadGame(){
 
@@ -532,6 +726,18 @@ function loadGame(){
 
     const savedCoin =
     localStorage.getItem("slotCoin");
+
+    const savedLevel =
+    localStorage.getItem("slotLevel");
+
+    const savedExp =
+    localStorage.getItem("slotExp");
+
+    const savedNextExp =
+    localStorage.getItem("slotNextExp");
+
+    const savedLuck =
+    localStorage.getItem("slotLuck");
 
     if(savedYen !== null){
 
@@ -542,6 +748,30 @@ function loadGame(){
     if(savedCoin !== null){
 
         coin = Number(savedCoin);
+
+    }
+
+    if(savedLevel !== null){
+
+        level = Number(savedLevel);
+
+    }
+
+    if(savedExp !== null){
+
+        exp = Number(savedExp);
+
+    }
+
+    if(savedNextExp !== null){
+
+        nextExp = Number(savedNextExp);
+
+    }
+
+    if(savedLuck !== null){
+
+        luckLevel = Number(savedLuck);
 
     }
 
