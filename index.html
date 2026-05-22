@@ -181,6 +181,51 @@ h1{
 
 }
 
+.controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.bet-btn{
+
+    background:#00bfff;
+
+    color:white;
+
+    border:none;
+
+    border-radius:15px;
+
+    padding:15px 25px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 15px #00bfff;
+
+    transition:0.2s;
+
+}
+
+.bet-btn:hover{
+
+    transform:scale(1.05);
+
+}
+
 #result{
 
     margin-top:35px;
@@ -360,6 +405,20 @@ h1{
         <span id="bet">100</span>
     </div>
 
+    <div class="controls">
+
+        <button class="bet-btn"
+        onclick="changeBet(-100)">
+            ➖ BET
+        </button>
+
+        <button class="bet-btn"
+        onclick="changeBet(100)">
+            ➕ BET
+        </button>
+
+    </div>
+
     <div class="slot-machine">
 
         <div class="slot-area">
@@ -481,6 +540,26 @@ function updateUI(){
 
     document.getElementById("luckLevel").innerHTML =
     luckLevel;
+
+}
+
+function changeBet(amount){
+
+    bet += amount;
+
+    if(bet < 100){
+
+        bet = 100;
+
+    }
+
+    if(bet > 5000){
+
+        bet = 5000;
+
+    }
+
+    updateUI();
 
 }
 
