@@ -1,1 +1,441 @@
+# ネオン風スロット（所持金付き）
 
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON SLOT</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    radial-gradient(circle at top,#35114d,#12051d 60%);
+    overflow:hidden;
+    font-family:sans-serif;
+    color:white;
+}
+
+.container{
+    width:900px;
+    background:rgba(0,0,0,0.4);
+    border:3px solid #ff00cc;
+    border-radius:30px;
+    padding:40px;
+    text-align:center;
+    box-shadow:
+    0 0 20px #ff00cc,
+    0 0 50px #6a00ff;
+}
+
+h1{
+    font-size:70px;
+    margin:0 0 20px;
+    color:#ffe600;
+    text-shadow:
+    0 0 10px #ffe600,
+    0 0 30px #ff9900,
+    0 0 50px #ff5500;
+}
+
+.money{
+    font-size:35px;
+    margin-bottom:30px;
+    color:#00ffea;
+    text-shadow:0 0 15px #00ffea;
+}
+
+.slot-area{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-bottom:30px;
+}
+
+.slot{
+    width:180px;
+    height:180px;
+    border-radius:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:90px;
+    background:#111;
+    border:5px solid #ffe600;
+    box-shadow:
+    0 0 20px #ffe600,
+    inset 0 0 20px #ff9900;
+}
+
+.bet-text{
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:15px;
+    font-size:25px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.start{
+    background:#00ff88;
+    box-shadow:0 0 20px #00ff88;
+}
+
+.bet{
+    background:#00c3ff;
+    box-shadow:0 0 20px #00c3ff;
+}
+
+#result{
+    margin-top:30px;
+    font-size:45px;
+    font-weight:bold;
+    min-height:60px;
+}
+
+.shop{
+    margin-top:40px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.08);
+    border:2px solid #00c3ff;
+    box-shadow:0 0 20px #00c3ff;
+}
+
+.shop h2{
+    margin-top:0;
+    color:#00ffea;
+    text-shadow:0 0 15px #00ffea;
+}
+
+.shop-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.shop-btn{
+    width:200px;
+    padding:20px;
+    background:#8a2eff;
+    color:white;
+    box-shadow:0 0 20px #8a2eff;
+    line-height:1.6;
+}
+
+.win{
+    color:#ffe600;
+    text-shadow:
+    0 0 10px #ffe600,
+    0 0 30px #ff8800,
+    0 0 50px #ff0000;
+    animation:flash 0.5s infinite;
+}
+
+.lose{
+    color:#ff5555;
+}
+
+@keyframes flash{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+@keyframes rainbow{
+    0%{filter:hue-rotate(0deg);}
+    100%{filter:hue-rotate(360deg);}
+}
+
+@keyframes explode{
+    0%{
+        transform:scale(0) rotate(0deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(2) rotate(720deg);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎰 NEON SLOT 🎰</h1>
+
+    <div class="money">
+        💰 所持金 : <span id="money">1000</span> 円
+    </div>
+
+    <div class="bet-text">
+        BET : <span id="bet">100</span> 円
+    </div>
+
+    <div class="slot-area">
+        <div class="slot" id="slot1">🍒</div>
+        <div class="slot" id="slot2">7</div>
+        <div class="slot" id="slot3">⭐</div>
+    </div>
+
+    <div class="controls">
+
+        <button class="bet" onclick="changeBet(-100)">BET -</button>
+
+        <button class="start" onclick="startSlot()">START</button>
+
+        <button class="bet" onclick="changeBet(100)">BET +</button>
+
+    </div>
+
+    <div id="result"></div>
+
+    <div class="shop">
+        <h2>🪙 COIN SHOP 🪙</h2>
+
+        <div class="shop-buttons">
+            <button class="shop-btn" onclick="buyCoins(1000,500)">
+                1000コイン購入<br>
+                500円
+            </button>
+
+            <button class="shop-btn" onclick="buyCoins(5000,2000)">
+                5000コイン購入<br>
+                2000円
+            </button>
+
+            <button class="shop-btn" onclick="buyCoins(10000,3500)">
+                10000コイン購入<br>
+                3500円
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+const symbols = ["🍒","🍋","🍉","7","⭐"];
+
+let money = 1000;
+let bet = 100;
+
+function updateUI(){
+
+    document.getElementById("money").innerHTML = money;
+    document.getElementById("bet").innerHTML = bet;
+
+}
+
+function changeBet(amount){
+
+    bet += amount;
+
+    if(bet < 100){
+        bet = 100;
+    }
+
+    if(bet > 500){
+        bet = 500;
+    }
+
+    updateUI();
+
+}
+
+function startSlot(){
+
+    if(money < bet){
+
+        document.getElementById("result").innerHTML = "💸 お金が足りません";
+        return;
+
+    }
+
+    money -= bet;
+    updateUI();
+
+    document.getElementById("result").innerHTML = "";
+
+    let count = 0;
+
+    const interval = setInterval(() => {
+
+        document.getElementById("slot1").innerHTML =
+        symbols[Math.floor(Math.random()*symbols.length)];
+
+        document.getElementById("slot2").innerHTML =
+        symbols[Math.floor(Math.random()*symbols.length)];
+
+        document.getElementById("slot3").innerHTML =
+        symbols[Math.floor(Math.random()*symbols.length)];
+
+        count++;
+
+        if(count > 20){
+
+            clearInterval(interval);
+            checkResult();
+
+        }
+
+    },100);
+
+}
+
+function checkResult(){
+
+    const s1 = document.getElementById("slot1").innerHTML;
+    const s2 = document.getElementById("slot2").innerHTML;
+    const s3 = document.getElementById("slot3").innerHTML;
+
+    const result = document.getElementById("result");
+    const body = document.body;
+
+    if(s1 == s2 && s2 == s3){
+
+        let reward = bet * 5;
+
+        // 超激レア777
+        if(s1 == "7"){
+
+            reward = bet * 30;
+
+            body.style.animation = "rainbow 0.3s infinite";
+
+            result.innerHTML = "🌈🔥 SUPER JACKPOT +" + reward + "円 🔥🌈";
+            result.className = "win";
+
+            createExplosion();
+
+            setTimeout(()=>{
+                body.style.animation = "";
+            },4000);
+
+        }else{
+
+            result.innerHTML = "🎉 JACKPOT +" + reward + "円 🎉";
+            result.className = "win";
+
+        }
+
+        money += reward;
+
+    }else{
+
+        result.innerHTML = "😢 ハズレ";
+        result.className = "lose";
+
+    }
+
+    saveGame();
+    updateUI();
+
+}
+
+function createExplosion(){
+
+    for(let i=0;i<50;i++){
+
+        const particle = document.createElement("div");
+
+        particle.innerHTML = "✨";
+
+        particle.style.position = "fixed";
+        particle.style.left = Math.random()*100 + "vw";
+        particle.style.top = Math.random()*100 + "vh";
+        particle.style.fontSize = (Math.random()*40+20) + "px";
+        particle.style.pointerEvents = "none";
+        particle.style.zIndex = "9999";
+        particle.style.animation = "explode 1s forwards";
+
+        document.body.appendChild(particle);
+
+        setTimeout(()=>{
+            particle.remove();
+        },1000);
+
+    }
+
+}
+
+function saveGame(){
+
+    localStorage.setItem("slotMoney",money);
+
+}
+
+function buyCoins(amount,price){
+
+    money += amount;
+
+    const result = document.getElementById("result");
+
+    result.innerHTML = "🪙 " + amount + "コイン購入！";
+    result.className = "win";
+
+    saveGame();
+    updateUI();
+
+}
+
+function loadGame(){
+
+    const savedMoney = localStorage.getItem("slotMoney");
+
+    if(savedMoney){
+        money = Number(savedMoney);
+    }
+
+}
+
+loadGame();
+updateUI();
+
+updateUI();
+
+</script>
+
+</body>
+</html>
+```
+
+## 追加するともっと本格的になる機能
+
+* 効果音
+* リールを順番に止める
+* 777で超激レア演出
+* レベルシステム
+* オートスピン
+* ガチャ風虹背景
+* スマホ振動
+* 保存機能（localStorage）
